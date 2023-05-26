@@ -5,6 +5,54 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
     @Test
+    public void shouldNewStationCount() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(15);
+
+        Assertions.assertEquals(15, radio.getCurrentStation());
+    }
+
+    @Test
+    public void setMaxStationCount(){
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+
+        Assertions.assertEquals(29, radio.getCurrentStation());
+    }
+    @Test
+    public void setStationCount30(){
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(30);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+    @Test
+    public void setStationCountnext(){
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(28);
+        radio.next();
+
+        Assertions.assertEquals(29, radio.getCurrentStation());
+    }
+    @Test
+    public void setStationCountprev(){
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(1);
+        radio.prev();
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldSetBelowMinStationCount(){
+        Radio radio = new Radio(25);
+        radio.setCurrentStation(-1);
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+
+    @Test
     public void shouldSetCurrentStation() {
         Radio radio = new Radio();
         radio.setCurrentStation(4);
@@ -85,7 +133,7 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-   // _________________Volume________________
+    // _________________Volume________________
 
     @Test
     public void shouldSetCurrentVolume() {
