@@ -1,8 +1,21 @@
 package ru.netology.service;
 
 public class Radio {
-    private int currentStation; // значения в пределах от 0 до 9
-    private int volume; // уровень звука в пределах от 0 до 100
+    private int volume;
+    private int maxStation;
+    private int minStation;
+    private int currentStation = minStation;
+
+
+    public Radio() {
+        this.maxStation = 9;
+        this.minStation = 0;
+    }
+
+    public Radio(int stationCount) {
+        this.maxStation = stationCount - 1;
+        this.minStation = 0;
+    }
 
     //___________Station____________
     public int getCurrentStation() {
@@ -10,24 +23,24 @@ public class Radio {
     }
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < this.minStation) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > this.maxStation) {
             return;
         }
         this.currentStation = newCurrentStation;
     }
 
     public void next() {
-        int next = 0;
-        if (currentStation != 9) {
+        int next = this.minStation;
+        if (currentStation != this.maxStation) {
             currentStation++;
         } else setCurrentStation(next);
     }
 
     public void prev() {
-        int prev = 9;
+        int prev = this.maxStation;
         if (currentStation != 0) {
             currentStation--;
         } else setCurrentStation(prev);
